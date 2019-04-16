@@ -10,6 +10,14 @@ import java.util.Collections;
 
 // based on https://github.com/spring-projects/spring-statemachine/blob/master/spring-statemachine-samples/datapersist/src/main/java/demo/datapersist/StateMachineController.java
 
+/**
+ * Forwards all workflow events from the Saga to the state machine identified by {@code flowId}. Loads and
+ * saves state machines.
+ * @param <S> enumeration of Saga's states
+ * @param <E> enumeration of Saga's events
+ * @see StateMachineService
+ * @see WorkflowListenerCallback
+ */
 public class WorkflowEngine<S extends Enum<S>, E extends Enum<E>> {
 
     private StateMachineService<S, E> stateMachineService;

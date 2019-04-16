@@ -15,12 +15,17 @@ import static com.github.axonworkflow.saga.ApprovalEvents.FinishApproval;
 import static com.github.axonworkflow.saga.ApprovalEvents.StartApproval;
 import static com.github.axonworkflow.saga.ApprovalStates.*;
 
+/**
+ * Configures state machine to be used by the workflow.
+ * @see AbstractWorkflowConfigurer
+ */
 @Configuration
-public class ApprovalWorkflowConfig extends AbstractWorkflowConfigurer<ApprovalStates, ApprovalEvents> {
+public class ApprovalWorkflow extends AbstractWorkflowConfigurer<ApprovalStates, ApprovalEvents> {
 
     @Autowired
     private CommandGateway commandGateway;
 
+    // Configure all the states.
     @Override
     public void configure(StateMachineStateConfigurer<ApprovalStates, ApprovalEvents> states) throws Exception {
         states.withStates()
@@ -29,6 +34,8 @@ public class ApprovalWorkflowConfig extends AbstractWorkflowConfigurer<ApprovalS
                 .states(EnumSet.allOf(ApprovalStates.class));
     }
 
+    // Configure all state transitions. Command gateway can be called from the actions
+    // accompanying any of the transitions.
     @Override
     public void configure(StateMachineTransitionConfigurer<ApprovalStates, ApprovalEvents> transitions) throws Exception {
         //@formatter:off

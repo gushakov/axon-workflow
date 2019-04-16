@@ -1,0 +1,22 @@
+@startuml
+
+' http://tinyurl.com/yyqzya9g
+
+Title Participant Approval State Machine
+
+
+State Initial
+Initial: machine started (initial)
+
+State Started
+Started: P1 pending approval
+
+State Finished
+Finished: P1 is approved (end)
+
+[*] -right-> Initial
+Initial -right-> Started : ApprovalStartedEvent
+Started -right-> Finished : ApprovalFinishedEvent
+Finished -right-> [*]
+
+@enduml
